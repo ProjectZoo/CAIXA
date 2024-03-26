@@ -7,25 +7,30 @@ public class App {
         ContaPoupanca contaPoupanca = null;
 
         while (true) {
-            int op = Integer.parseInt(JOptionPane.showInputDialog(null, "Escolha entre as opções: \n 1 - Abrir conta \n 2 - Fechar conta \n 3 - Depósito \n 4 - Saque \n 5 - Transferência \n 6 - Sair"));
+            int op = Integer.parseInt(showInputDialog("Escolha entre as opções: \n 1 - Abrir conta \n 2 - Fechar conta \n 3 - Depósito \n 4 - Saque \n 5 - Transferência \n 6 - Sair"));
 
             switch (op) {
                 case 1:
-                    String nome = JOptionPane.showInputDialog(null, "Digite o nome do cliente:");
-                    String cpf = JOptionPane.showInputDialog(null, "Digite o CPF do cliente:");
-                    String endereco = JOptionPane.showInputDialog(null, "Digite o endereço do cliente:");
-                    String telefone = JOptionPane.showInputDialog(null, "Digite o telefone do cliente:");
-                    cliente = new Cliente(nome, cpf, endereco, telefone);
+                    cliente = new Cliente(
+                        showInputDialog("Digite o nome do cliente:"),
+                        showInputDialog("Digite o CPF do cliente:"),
+                        showInputDialog("Digite o endereço do cliente:"),
+                        showInputDialog("Digite o telefone do cliente:")
+                    );
 
-                    String numeroConta = JOptionPane.showInputDialog(null, "Digite o número da conta corrente:");
-                    double limite = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o limite da conta corrente:"));
-                    contaCorrente = new ContaCorrente(numeroConta, cliente, limite);
+                    contaCorrente = new ContaCorrente(
+                        showInputDialog("Digite o número da conta corrente:"),
+                        cliente,
+                        Double.parseDouble(showInputDialog("Digite o limite da conta corrente:"))
+                    );
 
-                    String numeroContaPoupanca = JOptionPane.showInputDialog(null, "Digite o número da conta poupança:");
-                    double taxaJuros = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite a taxa de juros da conta poupança:"));
-                    contaPoupanca = new ContaPoupanca(numeroContaPoupanca, cliente, taxaJuros);
+                    contaPoupanca = new ContaPoupanca(
+                        showInputDialog("Digite o número da conta poupança:"),
+                        cliente,
+                        Double.parseDouble(showInputDialog("Digite a taxa de juros da conta poupança:"))
+                    );
 
-                    JOptionPane.showMessageDialog(null, "Conta aberta com sucesso!");
+                    showMessageDialog("Conta aberta com sucesso!");
                     break;
 
                 case 2:
@@ -33,51 +38,52 @@ public class App {
                         contaCorrente = null;
                         contaPoupanca = null;
                         cliente = null;
-                        JOptionPane.showMessageDialog(null, "Conta fechada com sucesso!");
+                        showMessageDialog("Conta fechada com sucesso!");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Não há conta aberta para fechar!");
+                        showMessageDialog("Não há conta aberta para fechar!");
                     }
                     break;
 
                 case 3:
                     if (contaCorrente != null) {
-                        double valorDeposito = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o valor do depósito:"));
-                        contaCorrente.depositar(valorDeposito);
-                        JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso!");
+                        contaCorrente.depositar(Double.parseDouble(showInputDialog("Digite o valor do depósito:")));
+                        showMessageDialog("Depósito realizado com sucesso!");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Não há conta aberta para realizar o depósito!");
+                        showMessageDialog("Não há conta aberta para realizar o depósito!");
                     }
                     break;
 
                 case 4:
                     if (contaCorrente != null) {
-                        double valorSaque = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o valor do saque:"));
-                        contaCorrente.sacar(valorSaque);
-                        JOptionPane.showMessageDialog(null, "Saque realizado com sucesso!");
+                        contaCorrente.sacar(Double.parseDouble(showInputDialog("Digite o valor do saque:")));
+                        showMessageDialog("Saque realizado com sucesso!");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Não há conta aberta para realizar o saque!");
+                        showMessageDialog("Não há conta aberta para realizar o saque!");
                     }
                     break;
 
                 case 5:
                     if (contaCorrente != null && contaPoupanca != null) {
-                        double valorTransferencia = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o valor da transferência:"));
-                        contaCorrente.transferir(valorTransferencia, contaPoupanca);
-                        JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!");
+                        contaCorrente.transferir(Double.parseDouble(showInputDialog("Digite o valor da transferência:")), contaPoupanca);
+                        showMessageDialog("Transferência realizada com sucesso!");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Não há contas abertas para realizar a transferência!");
+                        showMessageDialog("Não há contas abertas para realizar a transferência!");
                     }
                     break;
 
                 case 6:
-                    JOptionPane.showMessageDialog(null, "Obrigado por usar nosso caixa virtual!");
+                    showMessageDialog("Obrigado por usar nosso caixa virtual!");
                     System.exit(0);
-                    break;
-
-                default:
-                    JOptionPane.showMessageDialog(null, "Opção inválida!");
                     break;
             }
         }
+    }
+
+    private static String showInputDialog(String message) {
+        return JOptionPane.showInputDialog(null, message);
+    }
+
+    private static void showMessageDialog(String message) {
+        JOptionPane.showMessageDialog(null, message);
     }
 }
