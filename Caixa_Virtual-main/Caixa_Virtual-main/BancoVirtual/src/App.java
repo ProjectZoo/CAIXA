@@ -27,10 +27,10 @@ public class App {
                     contaPoupanca = new ContaPoupanca(
                         showInputDialog("Digite o número da conta poupança:"),
                         cliente,
-                        Double.parseDouble(showInputDialog("Digite a taxa de juros da conta poupança:"))
+                        Double.parseDouble(showInputDialog("Digite a taxa de juros:"))
                     );
 
-                    showMessageDialog("Conta aberta com sucesso!");
+                    showMessageDialog("Conta aberta!");
                     break;
 
                 case 2:
@@ -38,41 +38,41 @@ public class App {
                         contaCorrente = null;
                         contaPoupanca = null;
                         cliente = null;
-                        showMessageDialog("Conta fechada com sucesso!");
+                        showMessageDialog("Sucesso!");
                     } else {
-                        showMessageDialog("Não há conta aberta para fechar!");
+                        showMessageDialog("Abra a conta");
                     }
                     break;
 
                 case 3:
                     if (contaCorrente != null) {
                         contaCorrente.depositar(Double.parseDouble(showInputDialog("Digite o valor do depósito:")));
-                        showMessageDialog("Depósito realizado com sucesso!");
+                        showMessageDialog("Sucesso");
                     } else {
-                        showMessageDialog("Não há conta aberta para realizar o depósito!");
+                        showMessageDialog("Abra a conta");
                     }
                     break;
 
                 case 4:
                     if (contaCorrente != null) {
                         contaCorrente.sacar(Double.parseDouble(showInputDialog("Digite o valor do saque:")));
-                        showMessageDialog("Saque realizado com sucesso!");
+                        showMessageDialog("Sucesso!");
                     } else {
-                        showMessageDialog("Não há conta aberta para realizar o saque!");
+                        showMessageDialog("Abra a conta");
                     }
                     break;
 
                 case 5:
                     if (contaCorrente != null && contaPoupanca != null) {
                         contaCorrente.transferir(Double.parseDouble(showInputDialog("Digite o valor da transferência:")), contaPoupanca);
-                        showMessageDialog("Transferência realizada com sucesso!");
+                        showMessageDialog("Sucesso");
                     } else {
-                        showMessageDialog("Não há contas abertas para realizar a transferência!");
+                        showMessageDialog("Abra a conta");
                     }
                     break;
 
                 case 6:
-                    showMessageDialog("Obrigado por usar nosso caixa virtual!");
+                    showMessageDialog("Sair");
                     System.exit(0);
                     break;
             }
